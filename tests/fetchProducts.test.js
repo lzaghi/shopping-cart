@@ -17,6 +17,10 @@ describe('1 - Teste a função fetchProducts', () => {
     expect(await fetchProducts('computador')).toEqual(computadorSearch);
   });
   it('checks if error when no parameter', async () => {
-    expect(await fetchProducts('computador')).toThrow('You must provide an url');
+    try {
+      await fetchProducts();
+    } catch (err) {
+      expect(err).toEqual(new Error ('You must provide an url'));
+    }
   });
 });
