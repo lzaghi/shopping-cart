@@ -1,10 +1,6 @@
 // Esse tipo de comentário que estão antes de todas as funções são chamados de JSdoc,
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições! 
 
-// const { fetchItem } = require("./helpers/fetchItem");
-
-// const { fetchProducts } = require('./helpers/fetchProducts');
-
 // Fique a vontade para modificar o código já escrito e criar suas próprias funções!
 
 /**
@@ -72,16 +68,27 @@ const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  li.addEventListener('click', cartItemClickListener);
+  // li.addEventListener('click', cartItemClickListener);
   return li;
 };
 
-const addItems = async () => {
+const capturaPorId = async (id) => {
+  const data = await fetchItem(id);
+  const li = createCartItemElement(data);
+
+  const cartList = document.querySelector('.cart__items');
+  cartList.appendChild(li);
+};
+
+const addItems = () => {
   const addButtons = document.getElementsByClassName('item__add');
   for (let i = 0; i < addButtons.length; i += 1) {
-    addButtons[i].addEventListener('click', (event) => {
-      console.log(event);
-    });
+    addButtons[i].addEventListener('click', () => {
+      const sectionPai = addButtons[i].parentElement;
+      const id = sectionPai.firstChild.innerText;
+
+      capturaPorId(id);
+    }); 
   }
 };
 
