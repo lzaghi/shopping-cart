@@ -5,7 +5,7 @@ const fetchProducts = async (item) => {
   const request = await fetch(url);
   const response = await request.json();
   return response;
-  // console.log(response);
+  // console.log(response.results);
 };
 
 // fetchProducts('computador');

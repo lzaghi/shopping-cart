@@ -1,7 +1,7 @@
 // Esse tipo de comentário que estão antes de todas as funções são chamados de JSdoc,
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições! 
 
-const { fetchProducts } = require('./helpers/fetchProducts');
+// const { fetchProducts } = require('./helpers/fetchProducts');
 
 // Fique a vontade para modificar o código já escrito e criar suas próprias funções!
 
@@ -10,12 +10,12 @@ const { fetchProducts } = require('./helpers/fetchProducts');
  * @param {string} imageSource - URL da imagem.
  * @returns {Element} Elemento de imagem do produto.
  */
-// const createProductImageElement = (imageSource) => {
-//   const img = document.createElement('img');
-//   img.className = 'item__image';
-//   img.src = imageSource;
-//   return img;
-// };
+const createProductImageElement = (imageSource) => {
+  const img = document.createElement('img');
+  img.className = 'item__image';
+  img.src = imageSource;
+  return img;
+};
 
 /**
  * Função responsável por criar e retornar qualquer elemento.
@@ -24,12 +24,12 @@ const { fetchProducts } = require('./helpers/fetchProducts');
  * @param {string} innerText - Texto do elemento.
  * @returns {Element} Elemento criado.
  */
-// const createCustomElement = (element, className, innerText) => {
-//   const e = document.createElement(element);
-//   e.className = className;
-//   e.innerText = innerText;
-//   return e;
-// };
+const createCustomElement = (element, className, innerText) => {
+  const e = document.createElement(element);
+  e.className = className;
+  e.innerText = innerText;
+  return e;
+};
 
 /**
  * Função responsável por criar e retornar o elemento do produto.
@@ -74,8 +74,16 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
 //   return li;
 // };
 
-const data = fetchProducts('computador');
+const addItems = async () => {
+  const data = await fetchProducts('computador');
+  const itemsList = document.querySelector('.items');
+
+  data.results.forEach((e) => {
+    const item = createProductItemElement(e);
+    itemsList.appendChild(item);
+  });
+};
 
 window.onload = () => {
-  createProductItemElement(data);
+  addItems();
 };
