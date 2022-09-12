@@ -68,11 +68,13 @@ const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  // li.addEventListener('click', cartItemClickListener);
+  li.addEventListener('click', cartItemClickListener = () => {
+    li.remove();
+  });
   return li;
 };
 
-const capturaPorId = async (id) => {
+const addCartByID = async (id) => {
   const data = await fetchItem(id);
   const li = createCartItemElement(data);
 
@@ -80,14 +82,14 @@ const capturaPorId = async (id) => {
   cartList.appendChild(li);
 };
 
-const addItems = () => {
+const captureItemID = () => {
   const addButtons = document.getElementsByClassName('item__add');
   for (let i = 0; i < addButtons.length; i += 1) {
     addButtons[i].addEventListener('click', () => {
       const sectionPai = addButtons[i].parentElement;
       const id = sectionPai.firstChild.innerText;
 
-      capturaPorId(id);
+      addCartByID(id);
     }); 
   }
 };
@@ -101,7 +103,7 @@ const addProducts = async () => {
     itemsList.appendChild(item);
   });
 
-  addItems();
+  captureItemID();
 };
 
 window.onload = () => {
