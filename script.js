@@ -56,6 +56,12 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  */
 // const getIdFromProductItem = (product) => product.querySelector('span.id').innerText;
 
+const cartList = document.querySelector('.cart__items');
+// const atualizaLocal = () => {
+//   // localStorage.setItem('cartItems', JSON.stringify([]));
+//   saveCartItems(cartList.outerHTML);
+// };
+
 /**
  * Função responsável por criar e retornar um item do carrinho.
  * @param {Object} product - Objeto do produto.
@@ -70,6 +76,8 @@ const createCartItemElement = ({ id, title, price }) => {
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
   li.addEventListener('click', cartItemClickListener = () => {
     li.remove();
+    console.log(JSON.stringify(cartList.outerHTML));
+    saveCartItems(JSON.stringify(cartList.outerHTML));
   });
   return li;
 };
@@ -78,10 +86,9 @@ const addCartByID = async (id) => {
   const data = await fetchItem(id);
   const li = createCartItemElement(data);
 
-  const cartList = document.querySelector('.cart__items');
   cartList.appendChild(li);
-  
-  saveCartItems(li);
+  console.log(JSON.stringify(cartList.outerHTML));
+  saveCartItems(JSON.stringify(cartList.outerHTML));
 };
 
 const captureItemID = () => {
@@ -108,6 +115,18 @@ const addProducts = async () => {
   captureItemID();
 };
 
+// const removeFromCart = () => {
+// };
+// const lista = document.getElementsByClassName('cart__item');
+// for (let i = lista.length - 1; i >= 0; i -= 1) {
+//   lista[i].addEventListener('click', () => {
+//     lista[i].remove();
+//     console.log(lista[i]);
+//   });
+// }
+
 window.onload = () => {
   addProducts();
+  // getSavedCartItems();
+  // removeFromCart();
 };
