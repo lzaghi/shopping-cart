@@ -57,6 +57,16 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
 // const getIdFromProductItem = (product) => product.querySelector('span.id').innerText;
 
 const cartList = document.querySelector('.cart__items');
+const total = document.querySelector('.total-price');
+
+const subTotal = (preco) => {
+  base = localStorage.getItem('total');
+  let convertido = JSON.parse(base);
+  convertido -= Number(preco);
+  const arredondado = Math.round((convertido + Number.EPSILON) * 100) / 100;
+  total.innerHTML = arredondado;
+  localStorage.setItem('total', JSON.stringify(arredondado));
+};
 
 /**
  * Função responsável por criar e retornar um item do carrinho.
@@ -73,8 +83,19 @@ const createCartItemElement = ({ id, title, price }) => {
   li.addEventListener('click', cartItemClickListener = (event) => {
     event.target.remove();
     saveCartItems(JSON.stringify(cartList.innerHTML));
+
+    subTotal(price);
   });
   return li;
+};
+
+const addTotal = (preco) => {
+  base = localStorage.getItem('total');
+  let convertido = JSON.parse(base);
+  convertido += Number(preco);
+  const arredondado = Math.round((convertido + Number.EPSILON) * 100) / 100;
+  total.innerHTML = arredondado;
+  localStorage.setItem('total', JSON.stringify(arredondado));
 };
 
 const addCartByID = async (id) => {
@@ -83,6 +104,8 @@ const addCartByID = async (id) => {
 
   cartList.appendChild(li);
   saveCartItems(JSON.stringify(cartList.innerHTML));
+
+  addTotal(data.price);
 };
 
 const captureItemID = () => {
@@ -109,12 +132,22 @@ const addProducts = async () => {
   captureItemID();
 };
 
+const pegaValor = (string) => {
+  const array = string.split('$');
+  const valor = array[1];
+
+  subTotal(valor);
+};
+
 const removeFromCart = () => {
   const lista = document.getElementsByClassName('cart__item');
   for (let i = lista.length - 1; i >= 0; i -= 1) {
     lista[i].addEventListener('click', (event) => {
       event.target.remove();
-      console.log(lista[i]);
+      localStorage.setItem('cartItems', JSON.stringify(cartList.innerHTML));
+
+      const string = event.target.innerHTML;
+      pegaValor(string);
     });
   }
 };
@@ -128,8 +161,19 @@ const pegaDoLocal = () => {
   removeFromCart();
 };
 
+const atualizaTotal = () => {
+  if (localStorage.getItem('total') === null) {
+    localStorage.setItem('total', '0');
+    total.innerHTML = 0;
+  } else {
+    base = localStorage.getItem('total');
+    const convertido = JSON.parse(base);
+    total.innerHTML = convertido;
+  }
+};
+
 window.onload = () => {
   addProducts();
-  // getSavedCartItems();
   pegaDoLocal();
+  atualizaTotal();
 };
