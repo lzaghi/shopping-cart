@@ -57,10 +57,6 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
 // const getIdFromProductItem = (product) => product.querySelector('span.id').innerText;
 
 const cartList = document.querySelector('.cart__items');
-// const atualizaLocal = () => {
-//   // localStorage.setItem('cartItems', JSON.stringify([]));
-//   saveCartItems(cartList.outerHTML);
-// };
 
 /**
  * Função responsável por criar e retornar um item do carrinho.
@@ -74,10 +70,9 @@ const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  li.addEventListener('click', cartItemClickListener = () => {
-    li.remove();
-    console.log(JSON.stringify(cartList.outerHTML));
-    saveCartItems(JSON.stringify(cartList.outerHTML));
+  li.addEventListener('click', cartItemClickListener = (event) => {
+    event.target.remove();
+    saveCartItems(JSON.stringify(cartList.innerHTML));
   });
   return li;
 };
@@ -87,15 +82,14 @@ const addCartByID = async (id) => {
   const li = createCartItemElement(data);
 
   cartList.appendChild(li);
-  console.log(JSON.stringify(cartList.outerHTML));
-  saveCartItems(JSON.stringify(cartList.outerHTML));
+  saveCartItems(JSON.stringify(cartList.innerHTML));
 };
 
 const captureItemID = () => {
   const addButtons = document.getElementsByClassName('item__add');
   for (let i = 0; i < addButtons.length; i += 1) {
-    addButtons[i].addEventListener('click', () => {
-      const sectionPai = addButtons[i].parentElement;
+    addButtons[i].addEventListener('click', (event) => {
+      const sectionPai = event.target.parentElement;
       const id = sectionPai.firstChild.innerText;
 
       addCartByID(id);
@@ -115,18 +109,27 @@ const addProducts = async () => {
   captureItemID();
 };
 
-// const removeFromCart = () => {
-// };
-// const lista = document.getElementsByClassName('cart__item');
-// for (let i = lista.length - 1; i >= 0; i -= 1) {
-//   lista[i].addEventListener('click', () => {
-//     lista[i].remove();
-//     console.log(lista[i]);
-//   });
-// }
+const removeFromCart = () => {
+  const lista = document.getElementsByClassName('cart__item');
+  for (let i = lista.length - 1; i >= 0; i -= 1) {
+    lista[i].addEventListener('click', (event) => {
+      event.target.remove();
+      console.log(lista[i]);
+    });
+  }
+};
+
+const pegaDoLocal = () => {
+  if (getSavedCartItems() !== null) {
+    const cartItems = localStorage.getItem('cartItems');
+    cartList.innerHTML = JSON.parse(cartItems);
+  }
+
+  removeFromCart();
+};
 
 window.onload = () => {
   addProducts();
   // getSavedCartItems();
-  // removeFromCart();
+  pegaDoLocal();
 };
