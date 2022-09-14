@@ -120,19 +120,12 @@ const captureItemID = () => {
   }
 };
 
-const addLoading = () => {
-  const load = document.createElement('div');
-  load.className = 'loading';
-  load.innerHTML = 'carregando...';
-};
-
 const removeLoading = () => {
   const loading = document.querySelector('.loading');
   loading.remove();
 };
 
 const addProducts = async () => {
-  addLoading();
   const data = await fetchProducts('computador');
   removeLoading();
   const itemsList = document.querySelector('.items');
