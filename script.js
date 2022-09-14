@@ -172,8 +172,23 @@ const atualizaTotal = () => {
   }
 };
 
+const emptyCart = () => {
+  const buttonEmpty = document.querySelector('.empty-cart');
+  buttonEmpty.addEventListener('click', () => {
+    console.log(cartList.children);
+    for (let i = cartList.children.length - 1; i >= 0; i -= 1) {
+      cartList.children[i].remove();
+    }
+    saveCartItems(JSON.stringify(cartList.innerHTML));
+
+    localStorage.setItem('total', '0');
+    total.innerHTML = 0;
+  });
+};
+
 window.onload = () => {
   addProducts();
   pegaDoLocal();
   atualizaTotal();
+  emptyCart();
 };
