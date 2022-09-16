@@ -37,14 +37,15 @@ const createCustomElement = (element, className, innerText) => {
  * @param {string} product.thumbnail - URL da imagem do produto.
  * @returns {Element} Elemento de produto.
  */
-const createProductItemElement = ({ id, title, thumbnail }) => {
+const createProductItemElement = ({ id, title, thumbnail, price }) => {
   const section = document.createElement('section');
   section.className = 'item';
 
-  section.appendChild(createCustomElement('span', 'item_id', id));
+  section.appendChild(createCustomElement('span', 'item__id', id));
   section.appendChild(createCustomElement('span', 'item__title', title));
   section.appendChild(createProductImageElement(thumbnail));
-  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
+  section.appendChild(createCustomElement('span', 'item__price', `R$ ${price}`));
+  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho'));
 
   return section;
 };
@@ -54,7 +55,7 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @param {Element} product - Elemento do produto.
  * @returns {string} ID do produto.
  */
-// const getIdFromProductItem = (product) => product.querySelector('span.id').innerText;
+// const getIdFromProductItem = (product) => product.querySelector('span.item__id').innerText;
 
 const cartList = document.querySelector('.cart__items');
 const total = document.querySelector('.total-price');
@@ -68,6 +69,18 @@ const subTotal = (preco) => {
   localStorage.setItem('total', JSON.stringify(arredondado));
 };
 
+// const removeItem = (li, price) => {
+//   const botao = li.lastChild;
+//   console.log(botao);
+//   const evento = botao.addEventListener('click', cartItemClickListener = (event) => {
+//     event.target.parentElement.remove();
+//     saveCartItems(JSON.stringify(cartList.innerHTML));
+
+//     subTotal(price);
+//   });
+//   return evento;
+// };
+
 /**
  * Função responsável por criar e retornar um item do carrinho.
  * @param {Object} product - Objeto do produto.
@@ -78,8 +91,17 @@ const subTotal = (preco) => {
  */
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
+  // const span = document.createElement('span');
+  // const x = document.createElement('i');
+  // span.innerHTML = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
+  // x.className = 'material-icons';
+  // x.innerHTML = 'close';
   li.className = 'cart__item';
-  li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
+  // li.appendChild(createProductImageElement(thumbnail));
+  // li.appendChild(span);
+  li.innerHTML = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
+  // li.appendChild(x);
+  // removeItem(li, price);
   li.addEventListener('click', cartItemClickListener = (event) => {
     event.target.remove();
     saveCartItems(JSON.stringify(cartList.innerHTML));
