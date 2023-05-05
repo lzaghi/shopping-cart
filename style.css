@@ -1,8 +1,8 @@
 :root {
-  --blue: #00D5E2;
-  --light-blue: #F3F9FB;
-  --purple: #41197F;
-  --bg-gray: #EFEFEF;
+  --blue: #00d5e2;
+  --light-blue: #f3f9fb;
+  --purple: #41197f;
+  --bg-gray: #efefef;
   --text-color: #444955;
 }
 
@@ -29,10 +29,24 @@ body {
 
 .container-title {
   width: 68.5%;
+  display: flex;
+  align-items: center;
 }
 
 .title {
-  padding-left: 30px;
+  padding-left: 40px;
+}
+
+#search {
+  margin-top: 5px;
+  margin-inline: auto;
+}
+
+#search-input {
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  padding: 4px 40px 4px;
 }
 
 .container-cartTitle {
@@ -80,8 +94,8 @@ body {
   display: flex;
   flex-direction: column;
   height: auto;
-  margin-top: 35px;
-  margin-left: 30px;
+  margin-top: 45px;
+  margin-left: 40px;
   width: 272px;
   /* border: 2px solid rgb(234, 234, 233); */
   border-radius: 5px;

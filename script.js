@@ -131,11 +131,11 @@ const captureItemID = () => {
 
 const removeLoading = () => {
   const loading = document.querySelector('.loading');
-  loading.remove();
+  if (loading) loading.remove();
 };
 
-const addProducts = async () => {
-  const data = await fetchProducts('computador');
+const addProducts = async (product = 'computador') => {
+  const data = await fetchProducts(product);
   removeLoading();
   const itemsList = document.querySelector('.items');
 
@@ -146,6 +146,20 @@ const addProducts = async () => {
 
   captureItemID();
 };
+
+const input = document.getElementById('search-input');
+input.addEventListener('keypress', (event) => {
+  if (input.value && event.key === 'Enter') {
+    const itemsList = document.querySelector('.items');
+    for (let i = itemsList.children.length - 1; i >= 0; i -= 1) {
+      itemsList.lastChild.remove();
+    }
+    // itemsList.children.remove();
+
+    addProducts(input.value);
+    input.value = '';
+  }
+});
 
 const pegaValor = (string) => {
   const array = string.split('$');
