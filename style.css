@@ -230,3 +230,7 @@ ol li img {
   cursor: pointer;
   transition: 0.2s;
 }
+
+.material-icons:hover {
+  cursor: pointer;
+}
