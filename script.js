@@ -69,18 +69,6 @@ const subTotal = (preco) => {
   localStorage.setItem('total', JSON.stringify(arredondado));
 };
 
-// const removeItem = (li, price) => {
-//   const botao = li.lastChild;
-//   console.log(botao);
-//   const evento = botao.addEventListener('click', cartItemClickListener = (event) => {
-//     event.target.parentElement.remove();
-//     saveCartItems(JSON.stringify(cartList.innerHTML));
-
-//     subTotal(price);
-//   });
-//   return evento;
-// };
-
 /**
  * Função responsável por criar e retornar um item do carrinho.
  * @param {Object} product - Objeto do produto.
@@ -89,21 +77,20 @@ const subTotal = (preco) => {
  * @param {string} product.price - Preço do produto.
  * @returns {Element} Elemento de um item do carrinho.
  */
-const createCartItemElement = ({ id, title, price }) => {
+const createCartItemElement = ({ id, title, thumbnail, price }) => {
   const li = document.createElement('li');
-  // const span = document.createElement('span');
-  // const x = document.createElement('i');
-  // span.innerHTML = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  // x.className = 'material-icons';
-  // x.innerHTML = 'close';
+  const span = document.createElement('span');
+  const x = document.createElement('i');
+  span.innerHTML = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
+  x.className = 'material-icons';
+  x.innerHTML = 'close';
   li.className = 'cart__item';
-  // li.appendChild(createProductImageElement(thumbnail));
-  // li.appendChild(span);
-  li.innerHTML = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  // li.appendChild(x);
-  // removeItem(li, price);
-  li.addEventListener('click', cartItemClickListener = (event) => {
-    event.target.remove();
+  li.appendChild(createProductImageElement(thumbnail));
+  li.appendChild(span);
+  // li.innerHTML = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
+  li.appendChild(x);
+  x.addEventListener('click', cartItemClickListener = (event) => {
+    event.target.parentNode.remove();
     saveCartItems(JSON.stringify(cartList.innerHTML));
 
     subTotal(price);
@@ -168,13 +155,15 @@ const pegaValor = (string) => {
 };
 
 const removeFromCart = () => {
+  console.log('chamou remove');
   const lista = document.getElementsByClassName('cart__item');
   for (let i = lista.length - 1; i >= 0; i -= 1) {
-    lista[i].addEventListener('click', (event) => {
-      event.target.remove();
+    lista[i].lastChild.addEventListener('click', (event) => {
+      console.log(event.target);
+      event.target.parentNode.remove();
       localStorage.setItem('cartItems', JSON.stringify(cartList.innerHTML));
 
-      const string = event.target.innerHTML;
+      const string = event.target.previousSibling.innerHTML;
       pegaValor(string);
     });
   }
