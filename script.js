@@ -136,6 +136,8 @@ const removeLoading = () => {
 
 const addProducts = async (product = 'computador') => {
   const data = await fetchProducts(product);
+  console.log(data);
+  if (!data.results.length) alert('Nenhum produto encontrado!');
   removeLoading();
   const itemsList = document.querySelector('.items');
 
