@@ -148,6 +148,12 @@ body {
   width: 248px;
   border-radius: 5px;
   align-self: center;
+  transition: 0.3s;
+}
+
+.item .item__add:hover {
+  background-color: #00939b;
+  transition: 0.3s;
 }
 
 .cart {
@@ -216,4 +222,11 @@ ol li img {
   font-size: 16px;
   text-align: center;
   border: none;
+  transition: 0.2s;
+}
+
+.empty-cart:hover {
+  background-color: #8147da;
+  cursor: pointer;
+  transition: 0.2s;
 }
