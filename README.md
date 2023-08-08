@@ -1,13 +1,48 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+# Shopping Cart
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+Essa é uma implementação de carrinho de compras dinâmico, que possibilita o usuário a buscar diferentes produtos, adicionar e remover itens do carrinho, sendo ele salvo automaticamente a cada alteração.
+Tudo isso com testes pensados para os casos de uso da aplicação, garantindo a qualidade e integridade do código.
+A aplicação consome a API pública do Mercado Livre.
+
+O foco dessa projeto foi explorar o consumo de APIs e a metodologia TDD (test driven development).
+
+[Experimente!](https://lzaghi.github.io/to-do-list/)
+
+## Funcionalidades
+
+- Busca de diferentes produtos
+- Inserção e remoção de itens no carrinho
+- Valor total atualizado a cada ação
+- Carrinho salvo automaticamente a cada ação
+- Salvar a lista
+
+## Demonstração
+
+![](cart.gif)
+
+
+## Tecnologias utilizadas
+
+HTML, CSS, JavaScript, DOM, Jest
+
+
+## Instalação local
+
+1. Clone o repositório 
+```bash
+  git clone git@github.com:lzaghi/shopping-cart.git
+```
+
+2. Entre no diretório 
+```bash
+  cd shopping-cart
+```
+
+3. Instale as dependências 
+```bash
+  npm install
+```
+4. Inicie a aplicação com a extensão Live Server do VSCode
+
+
