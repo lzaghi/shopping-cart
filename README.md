@@ -15,7 +15,6 @@ O foco dessa projeto foi explorar o consumo de APIs e a metodologia TDD (test dr
 - Inserção e remoção de itens no carrinho
 - Valor total atualizado a cada ação
 - Carrinho salvo automaticamente a cada ação
-- Salvar a lista
 
 ## Demonstração
 
