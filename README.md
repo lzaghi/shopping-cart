@@ -7,7 +7,7 @@ A aplicação consome a API pública do Mercado Livre.
 
 O foco dessa projeto foi explorar o consumo de APIs e a metodologia TDD (test driven development).
 
-[Experimente!](https://lzaghi.github.io/to-do-list/)
+[Experimente!](https://lzaghi.github.io/shopping-cart/)
 
 ## Funcionalidades
 
