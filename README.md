@@ -42,6 +42,10 @@ HTML, CSS, JavaScript, DOM, Jest
 ```bash
   npm install
 ```
-4. Inicie a aplicação com a extensão Live Server do VSCode
+4. Para rodar os testes
+```bash
+  npm test
+```
+5. Inicie a aplicação com a extensão Live Server do VSCode
 
 
